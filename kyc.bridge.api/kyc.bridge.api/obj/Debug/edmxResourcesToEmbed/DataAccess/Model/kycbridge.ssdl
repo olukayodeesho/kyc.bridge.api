@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="kycbridgeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ExceptionLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ErrorMessage" Type="text" />
+    <Property Name="ErrorStacktrace" Type="text" />
+    <Property Name="ErrorSource" Type="text" />
+    <Property Name="ErrorDatetime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="RequestResponseLog">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RequestBody" Type="varchar" MaxLength="5000" />
+    <Property Name="RequestUrl" Type="varchar" MaxLength="1000" />
+    <Property Name="HttpMethodType" Type="varchar" MaxLength="10" />
+    <Property Name="RequestTime" Type="datetime" />
+    <Property Name="ResponseBody" Type="varchar" MaxLength="5000" />
+    <Property Name="ResponseTime" Type="datetime" />
+    <Property Name="ResponseHttpCode" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityContainer Name="kycbridgeModelStoreContainer">
+    <EntitySet Name="ExceptionLog" EntityType="Self.ExceptionLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequestResponseLog" EntityType="Self.RequestResponseLog" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

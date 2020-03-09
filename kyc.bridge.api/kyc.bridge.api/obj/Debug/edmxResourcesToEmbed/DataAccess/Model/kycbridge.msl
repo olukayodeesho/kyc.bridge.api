@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="kycbridgeModelStoreContainer" CdmEntityContainer="kycbridgeEntities">
+    <EntitySetMapping Name="ExceptionLogs">
+      <EntityTypeMapping TypeName="kycbridgeModel.ExceptionLog">
+        <MappingFragment StoreEntitySet="ExceptionLog">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+          <ScalarProperty Name="ErrorStacktrace" ColumnName="ErrorStacktrace" />
+          <ScalarProperty Name="ErrorSource" ColumnName="ErrorSource" />
+          <ScalarProperty Name="ErrorDatetime" ColumnName="ErrorDatetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequestResponseLogs">
+      <EntityTypeMapping TypeName="kycbridgeModel.RequestResponseLog">
+        <MappingFragment StoreEntitySet="RequestResponseLog">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RequestBody" ColumnName="RequestBody" />
+          <ScalarProperty Name="RequestUrl" ColumnName="RequestUrl" />
+          <ScalarProperty Name="HttpMethodType" ColumnName="HttpMethodType" />
+          <ScalarProperty Name="RequestTime" ColumnName="RequestTime" />
+          <ScalarProperty Name="ResponseBody" ColumnName="ResponseBody" />
+          <ScalarProperty Name="ResponseTime" ColumnName="ResponseTime" />
+          <ScalarProperty Name="ResponseHttpCode" ColumnName="ResponseHttpCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -124,9 +124,14 @@ namespace kyc.bridge.api.BusinessLogic
             }
             return resp;
         }
-   
-        
-        
 
-         }
+        public static string GenerateTransactionRef()
+        {
+            var txnRef = "";
+            txnRef = "SF|KYC|BS|UBN|" + DateTime.Now.ToString("HHmmssfff");
+            return txnRef;
+        }
+
+
+    }
 }

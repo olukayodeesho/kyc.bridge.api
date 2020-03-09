@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kyc.bridge.api", "kyc.bridge.api\kyc.bridge.api.csproj", "{EABC9C8A-AA7C-4A1C-9D35-D7E4666EDB18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kyc.bridge.api.test", "kyc.bridge.api.test\kyc.bridge.api.test.csproj", "{ED7C8571-31CA-433B-B66E-2EA8C6E35194}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EABC9C8A-AA7C-4A1C-9D35-D7E4666EDB18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EABC9C8A-AA7C-4A1C-9D35-D7E4666EDB18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EABC9C8A-AA7C-4A1C-9D35-D7E4666EDB18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED7C8571-31CA-433B-B66E-2EA8C6E35194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED7C8571-31CA-433B-B66E-2EA8C6E35194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED7C8571-31CA-433B-B66E-2EA8C6E35194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED7C8571-31CA-433B-B66E-2EA8C6E35194}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
