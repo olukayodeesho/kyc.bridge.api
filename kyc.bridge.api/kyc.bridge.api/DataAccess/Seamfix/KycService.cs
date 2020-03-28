@@ -4,7 +4,9 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using kyc.bridge.api.BusinessLogic;
 using kyc.bridge.api.DataAccess.Repository;
@@ -15,7 +17,10 @@ namespace kyc.bridge.api.DataAccess.Seamfix
 {
     public class KycService
     {
-        private static string seamFixBaseUrl = ConfigurationManager.AppSettings["seamFixBaseUrl"].ToString();
+        private static string seamFixBaseUrl = ConfigurationManager.AppSettings["seamFixBaseUrlId"].ToString();
+        private static string seamFixBaseBvnUrl = ConfigurationManager.AppSettings["seamFixBaseUrlBvn"].ToString();
+        private static string seamFixBaseDocUrl = ConfigurationManager.AppSettings["seamFixBaseUrlDoc"].ToString();
+        private static string seamFixBaseStatusUrl = ConfigurationManager.AppSettings["seamFixBaseUrlStatus"].ToString();
 
         public static string IdServiceValidation(IdValidationRequest idValidation)
         {
@@ -47,6 +52,7 @@ namespace kyc.bridge.api.DataAccess.Seamfix
                 {
                     client.Headers.Add("USERID", "206410f2-3ba8-493e-8112-7e38a8e6212e");
                     client.Headers.Add("API-KEY", "QE2pQwOEi0wJ5px8eQECDoLYoz3b70z");
+
                     var fullUrl = seamFixBaseUrl + "id-service/" + idType;
                     var values = new NameValueCollection();
                     values["idNo"] = idValidation.idNo;
@@ -127,6 +133,39 @@ namespace kyc.bridge.api.DataAccess.Seamfix
             return responseString;
 
         }
+        public static string BvnServiceRequestValidation0(BvnServiceRequest bvnValidation)
+        {
+            var responseString = "";
+            try
+            {
+                var fullUrl = seamFixBaseBvnUrl + "bvn";
+                bvnValidation.transactionRef = KycLogic.GenerateTransactionRef();
+                var json = JsonConvert.SerializeObject(bvnValidation);
+                var requestTime = DateTime.Now;
+                using (var client = new HttpClient())
+                {
+                    Utils.AddCustomHeadersToHttpClient(client);
+
+                    var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    requestTime = DateTime.Now;
+                    var httpResponseMsg = client.PostAsync(fullUrl, data).Result;
+                    if (httpResponseMsg.IsSuccessStatusCode)
+                    {
+                        responseString = httpResponseMsg.Content.ReadAsStringAsync().Result;
+                    }
+                }
+                var responseTime = DateTime.Now;
+                RequestResponseRepository.SaveRequestResponse("POST", json, requestTime, fullUrl, responseString, "", responseTime);
+
+
+            }
+            catch (Exception e)
+            {
+                ExceptionLogRepository.SaveExceptionLog(e);
+            }
+            return responseString;
+        }
         public static string BvnServiceRequestValidation(BvnServiceRequest bvnValidation)
         {
             var responseString = "";
@@ -135,13 +174,20 @@ namespace kyc.bridge.api.DataAccess.Seamfix
 
                 using (var client = new WebClient())
                 {
-                    var fullUrl = seamFixBaseUrl + "bvn";
+                    //client.Headers.Add("Content-Type", "application/json");
+                    client.Headers.Add("userid", "206410f2-3ba8-493e-8112-7e38a8e6212e");
+                    client.Headers.Add("api-key", "QE2pQwOEi0wJ5px8eQECDoLYoz3b70z");
+                    //client.Headers.Add("Accept", "application/json");
+
+                    //client.Headers["Content-Type"]= "application/json";
+                    var fullUrl = seamFixBaseBvnUrl + "bvn";
                     var values = new NameValueCollection();
                     bvnValidation.transactionRef = KycLogic.GenerateTransactionRef();
                     values["transactionRef"] = bvnValidation.transactionRef;
                     values["bvn"] = bvnValidation.bvn;
                     var requestTime = DateTime.Now;
                     var response = client.UploadValues(fullUrl, values);
+
                     var responseTime = DateTime.Now;
 
                     responseString = Encoding.Default.GetString(response);
@@ -164,7 +210,7 @@ namespace kyc.bridge.api.DataAccess.Seamfix
             {
                 using (var client = new WebClient())
                 {
-                    var fullUrl = seamFixBaseUrl + "bvn";
+                    var fullUrl = seamFixBaseBvnUrl + "bvn";
                     var values = new NameValueCollection();
                     bvnFaceMatchValidation.transactionRef = KycLogic.GenerateTransactionRef();
                     values["transactionRef"] = bvnFaceMatchValidation.transactionRef;
@@ -184,79 +230,79 @@ namespace kyc.bridge.api.DataAccess.Seamfix
             }
             return responseString;
         }
-    
 
 
-         public static string DocumentServiceRequest(DocumentServiceRequest documentsValidation)
-         {
+
+        public static string DocumentServiceRequest(DocumentServiceRequest documentsValidation)
+        {
             var responseString = "";
             try
             {
 
-            using (var client = new WebClient())
-            {
-                var fullUrl = seamFixBaseUrl + "document/check/";
-                var values = new NameValueCollection();
+                using (var client = new WebClient())
+                {
+                    var fullUrl = seamFixBaseDocUrl + "document/check/";
+                    var values = new NameValueCollection();
 
-                values["firstname"] = documentsValidation.firstname;
-                values["surname"] = documentsValidation.surname;
-                values["dob"] = documentsValidation.dob;
-                values["phone"] = documentsValidation.phone;
-                values["email"] = documentsValidation.email;
-                values["documents"] = JsonConvert.SerializeObject(documentsValidation.documents);
-                var requestTime = DateTime.Now;
-                var response = client.UploadValues(fullUrl, values);
-                var responseTime = DateTime.Now;
+                    values["firstname"] = documentsValidation.firstname;
+                    values["surname"] = documentsValidation.surname;
+                    values["dob"] = documentsValidation.dob;
+                    values["phone"] = documentsValidation.phone;
+                    values["email"] = documentsValidation.email;
+                    values["documents"] = JsonConvert.SerializeObject(documentsValidation.documents);
+                    var requestTime = DateTime.Now;
+                    var response = client.UploadValues(fullUrl, values);
+                    var responseTime = DateTime.Now;
 
-                responseString = Encoding.Default.GetString(response);
-                RequestResponseRepository.SaveRequestResponse("POST", values.ToString(), requestTime, fullUrl, responseString, "", responseTime);
+                    responseString = Encoding.Default.GetString(response);
+                    RequestResponseRepository.SaveRequestResponse("POST", values.ToString(), requestTime, fullUrl, responseString, "", responseTime);
                 }
             }
-             catch (Exception e)
-             {
-                ExceptionLogRepository.SaveExceptionLog(e);
-             }
-             return responseString;
-    
-         }
-
-
-         public static string StatusServiceRequest(StatusServiceRequest statusService)
-         {
-             var responseString = "";
-             try
-             {
-             using (var client = new WebClient())
-             {
-                 var fullUrl = seamFixBaseUrl + "verification-status/";
-                 var values = new NameValueCollection();
-                    statusService.transactionRef = KycLogic.GenerateTransactionRef();
-                    values["transactionRef"] = statusService.transactionRef;
-                 var requestTime = DateTime.Now;
-                 var response = client.UploadValues(fullUrl, values);
-                 var responseTime = DateTime.Now;
-
-                 responseString = Encoding.Default.GetString(response);
-                 RequestResponseRepository.SaveRequestResponse("POST", values.ToString(), requestTime, fullUrl, responseString, "", responseTime);
-              }
-              }
             catch (Exception e)
             {
                 ExceptionLogRepository.SaveExceptionLog(e);
             }
             return responseString;
-         }
+
+        }
 
 
-
-         public static string KycTier3Verification(KycTier3Verification KycTier3Verif)
-         {
-             var responseString = "";
+        public static string StatusServiceRequest(StatusServiceRequest statusService)
+        {
+            var responseString = "";
             try
             {
                 using (var client = new WebClient())
                 {
-                   
+                    var fullUrl = seamFixBaseStatusUrl + "verification-status/";
+                    var values = new NameValueCollection();
+                    statusService.transactionRef = KycLogic.GenerateTransactionRef();
+                    values["transactionRef"] = statusService.transactionRef;
+                    var requestTime = DateTime.Now;
+                    var response = client.UploadValues(fullUrl, values);
+                    var responseTime = DateTime.Now;
+
+                    responseString = Encoding.Default.GetString(response);
+                    RequestResponseRepository.SaveRequestResponse("POST", values.ToString(), requestTime, fullUrl, responseString, "", responseTime);
+                }
+            }
+            catch (Exception e)
+            {
+                ExceptionLogRepository.SaveExceptionLog(e);
+            }
+            return responseString;
+        }
+
+
+
+        public static string KycTier3Verification(KycTier3Verification KycTier3Verif)
+        {
+            var responseString = "";
+            try
+            {
+                using (var client = new WebClient())
+                {
+
                     var fullUrl = seamFixBaseUrl + "KYC Tier-3 Verification";
                     var values = new NameValueCollection();
                     values["bvn"] = KycTier3Verif.bvn;
@@ -272,7 +318,7 @@ namespace kyc.bridge.api.DataAccess.Seamfix
                     var requestTime = DateTime.Now;
                     var response = client.UploadValues(fullUrl, values);
                     var responseTime = DateTime.Now;
-       
+
                     responseString = Encoding.Default.GetString(response);
                     RequestResponseRepository.SaveRequestResponse("POST", values.ToString(), requestTime, fullUrl, responseString, "", responseTime);
 
@@ -284,8 +330,8 @@ namespace kyc.bridge.api.DataAccess.Seamfix
                 ExceptionLogRepository.SaveExceptionLog(e);
             }
             return responseString;
-         }
+        }
 
-       
+
     }
 }

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="VerifySingleBVN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BVN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bankcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifySingleBVNResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifySingleBVNResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMultipleBVN">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BVN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bankcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="VerifyMultipleBVNResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="VerifyMultipleBVNResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BVNUpdateCustomerDetails">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="myCustUpt" type="tns:UpdateDetail" />
+            <s:element minOccurs="0" maxOccurs="1" name="bankcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UpdateDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BVN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="tns:Email" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstName" type="tns:FirstName" />
+          <s:element minOccurs="0" maxOccurs="1" name="Gender" type="tns:Gender" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="tns:LastName" />
+          <s:element minOccurs="0" maxOccurs="1" name="LevelOfAccount" type="tns:LevelOfAccount" />
+          <s:element minOccurs="0" maxOccurs="1" name="LgaOfOrigin" type="tns:LgaOfOrigin" />
+          <s:element minOccurs="0" maxOccurs="1" name="LgaOfResidence" type="tns:LgaOfResidence" />
+          <s:element minOccurs="0" maxOccurs="1" name="MaritalStatus" type="tns:MaritalStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="MiddleName" type="tns:MiddleName" />
+          <s:element minOccurs="0" maxOccurs="1" name="NIN" type="tns:NIN" />
+          <s:element minOccurs="0" maxOccurs="1" name="NameOnCard" type="tns:NameOnCard" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nationality" type="tns:Nationality" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber1" type="tns:PhoneNumber1" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber2" type="tns:PhoneNumber2" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResidentialAddress" type="tns:ResidentialAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateOfOrigin" type="tns:StateOfOrigin" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateOfResidence" type="tns:StateOfResidence" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="tns:Title" />
+          <s:element minOccurs="0" maxOccurs="1" name="DateOfBirth" type="tns:DateOfBirth" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Email">
+        <s:attribute name="OldEmail" type="s:string" />
+        <s:attribute name="NewEmail" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="FirstName">
+        <s:attribute name="OldFirstName" type="s:string" />
+        <s:attribute name="NewFirstName" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="Gender">
+        <s:attribute name="OldGender" type="s:string" />
+        <s:attribute name="NewGender" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="LastName">
+        <s:attribute name="OldLastName" type="s:string" />
+        <s:attribute name="NewLastName" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="LevelOfAccount">
+        <s:attribute name="OldLevelOfAccount" type="s:string" />
+        <s:attribute name="NewLevelOfAccount" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="LgaOfOrigin">
+        <s:attribute name="OldLgaOfOrigin" type="s:string" />
+        <s:attribute name="NewLgaOfOrigin" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="LgaOfResidence">
+        <s:attribute name="OldLgaOfResidence" type="s:string" />
+        <s:attribute name="NewLgaOfResidence" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="MaritalStatus">
+        <s:attribute name="OldMaritalStatus" type="s:string" />
+        <s:attribute name="NewMaritalStatus" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="MiddleName">
+        <s:attribute name="OldMiddleName" type="s:string" />
+        <s:attribute name="NewMiddleName" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="NIN">
+        <s:attribute name="OldNIN" type="s:string" />
+        <s:attribute name="NewNIN" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="NameOnCard">
+        <s:attribute name="OldNameOnCard" type="s:string" />
+        <s:attribute name="NewNameOnCard" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="Nationality">
+        <s:attribute name="OldNationality" type="s:string" />
+        <s:attribute name="NewNationality" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="PhoneNumber1">
+        <s:attribute name="OldPhoneNumber1" type="s:string" />
+        <s:attribute name="NewPhoneNumber1" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="PhoneNumber2">
+        <s:attribute name="OldPhoneNumber2" type="s:string" />
+        <s:attribute name="NewPhoneNumber2" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ResidentialAddress">
+        <s:attribute name="OldResidentialAddress" type="s:string" />
+        <s:attribute name="NewResidentialAddress" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="StateOfOrigin">
+        <s:attribute name="OldStateOfOrigin" type="s:string" />
+        <s:attribute name="NewStateOfOrigin" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="StateOfResidence">
+        <s:attribute name="OldStateOfResidence" type="s:string" />
+        <s:attribute name="NewStateOfResidence" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="Title">
+        <s:attribute name="OldTitle" type="s:string" />
+        <s:attribute name="NewTitle" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:complexType name="DateOfBirth">
+        <s:attribute name="OldDateOfBirth" type="s:string" />
+        <s:attribute name="NewDateOfBirth" type="s:string" />
+        <s:attribute name="ReasonForChange" type="s:string" />
+      </s:complexType>
+      <s:element name="BVNUpdateCustomerDetailsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BVNUpdateCustomerDetailsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="VerifySingleBVNSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifySingleBVN" />
+  </wsdl:message>
+  <wsdl:message name="VerifySingleBVNSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifySingleBVNResponse" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMultipleBVNSoapIn">
+    <wsdl:part name="parameters" element="tns:VerifyMultipleBVN" />
+  </wsdl:message>
+  <wsdl:message name="VerifyMultipleBVNSoapOut">
+    <wsdl:part name="parameters" element="tns:VerifyMultipleBVNResponse" />
+  </wsdl:message>
+  <wsdl:message name="BVNUpdateCustomerDetailsSoapIn">
+    <wsdl:part name="parameters" element="tns:BVNUpdateCustomerDetails" />
+  </wsdl:message>
+  <wsdl:message name="BVNUpdateCustomerDetailsSoapOut">
+    <wsdl:part name="parameters" element="tns:BVNUpdateCustomerDetailsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="BVNProcessorSoap">
+    <wsdl:operation name="VerifySingleBVN">
+      <wsdl:input message="tns:VerifySingleBVNSoapIn" />
+      <wsdl:output message="tns:VerifySingleBVNSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMultipleBVN">
+      <wsdl:input message="tns:VerifyMultipleBVNSoapIn" />
+      <wsdl:output message="tns:VerifyMultipleBVNSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BVNUpdateCustomerDetails">
+      <wsdl:input message="tns:BVNUpdateCustomerDetailsSoapIn" />
+      <wsdl:output message="tns:BVNUpdateCustomerDetailsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BVNProcessorSoap" type="tns:BVNProcessorSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VerifySingleBVN">
+      <soap:operation soapAction="http://tempuri.org/VerifySingleBVN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMultipleBVN">
+      <soap:operation soapAction="http://tempuri.org/VerifyMultipleBVN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BVNUpdateCustomerDetails">
+      <soap:operation soapAction="http://tempuri.org/BVNUpdateCustomerDetails" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BVNProcessorSoap12" type="tns:BVNProcessorSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="VerifySingleBVN">
+      <soap12:operation soapAction="http://tempuri.org/VerifySingleBVN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyMultipleBVN">
+      <soap12:operation soapAction="http://tempuri.org/VerifyMultipleBVN" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BVNUpdateCustomerDetails">
+      <soap12:operation soapAction="http://tempuri.org/BVNUpdateCustomerDetails" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BVNProcessor">
+    <wsdl:port name="BVNProcessorSoap" binding="tns:BVNProcessorSoap">
+      <soap:address location="http://10.0.34.236:88/BVNInterface/BVNProcessor.asmx" />
+    </wsdl:port>
+    <wsdl:port name="BVNProcessorSoap12" binding="tns:BVNProcessorSoap12">
+      <soap12:address location="http://10.0.34.236:88/BVNInterface/BVNProcessor.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
