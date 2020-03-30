@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -29,8 +30,8 @@ namespace kyc.bridge.api.BusinessLogic
 
         public static void AddCustomHeadersToHttpClient( HttpClient client)
          {
-            client.DefaultRequestHeaders.Add("userid", "206410f2-3ba8-493e-8112-7e38a8e6212e");
-            client.DefaultRequestHeaders.Add("api-key", "QE2pQwOEi0wJ5px8eQECDoLYoz3b70z"); 
+            client.DefaultRequestHeaders.Add("userid", ConfigurationManager.AppSettings["SeamFixUserId"]);
+            client.DefaultRequestHeaders.Add("api-key", ConfigurationManager.AppSettings["SeamFixApiKey"]); 
         }
     }
 }

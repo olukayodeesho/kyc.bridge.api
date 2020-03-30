@@ -295,6 +295,7 @@
       <DependentUpon>kycbridge.edmx</DependentUpon>
       <LastGenOutput>kycbridge.cs</LastGenOutput>
     </Content>
+    <Content Include="DataAccess\Seamfix\KycService.cs.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
