@@ -51,8 +51,7 @@ namespace kyc.bridge.api.BusinessLogic
             var resp = new BvnResponse();
             try
             {
-                //string jsonResponse = KycService.BvnServiceRequestValidation(bvnReq);
-                string jsonResponse = KycService.BvnServiceRequestValidation0(bvnReq);
+                string jsonResponse = KycService.BvnServiceRequestValidation(bvnReq);
                 resp = JsonConvert.DeserializeObject<BvnResponse>(jsonResponse);
 
             }

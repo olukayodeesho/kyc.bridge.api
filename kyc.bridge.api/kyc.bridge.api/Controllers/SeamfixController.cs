@@ -72,7 +72,7 @@ namespace kyc.bridge.api.Controllers
         }
 
         [System.Web.Http.HttpPost]
-        [System.Web.Http.Route("id-validation")]
+        [System.Web.Http.Route("addressVerification")]
         public AddressVerificationResponse DoAddressVerifReq(AddressVerificationRequest AddressVerifReq)
         {
             return KycLogic.AddressVerificationResponseProcessor(AddressVerifReq);
