@@ -210,11 +210,11 @@
     <Compile Include="BusinessLogic\KycLogic.cs" />
     <Compile Include="BusinessLogic\Utils.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BankController.cs" />
+    <Compile Include="Controllers\BankBvnController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SeamfixController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DataAccess\bvn\BvnService.cs" />
+    <Compile Include="DataAccess\BankBvn\BvnService.cs" />
     <Compile Include="DataAccess\Model\ExceptionLog.cs">
       <DependentUpon>kycbridge.tt</DependentUpon>
     </Compile>
@@ -238,7 +238,8 @@
     </Compile>
     <Compile Include="DataAccess\Repository\ExceptionLogRepository.cs" />
     <Compile Include="DataAccess\Repository\RequestResponseRepository.cs" />
-    <Compile Include="DataAccess\Seamfix\KycService.cs" />
+    <Compile Include="DataAccess\Seamfix\KycService_new.cs" />
+    <Compile Include="DataTransferObject\Request\AddressVerificationRequest.cs" />
     <Compile Include="DataTransferObject\Request\BankBvnRequest.cs" />
     <Compile Include="DataTransferObject\Request\BvnServiceFaceMatch.cs" />
     <Compile Include="DataTransferObject\Request\BvnServiceRequest.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="DataTransferObject\Request\DocumentServiceRequest.cs" />
     <Compile Include="DataTransferObject\Request\IdFaceMatchRequest.cs" />
     <Compile Include="DataTransferObject\Request\IdValidationRequest.cs" />
+    <Compile Include="DataTransferObject\Response\AddressVerificationResponse.cs" />
     <Compile Include="DataTransferObject\Response\BankBvnResponse.cs" />
     <Compile Include="DataTransferObject\Response\BvnFacematchResponse.cs" />
     <Compile Include="DataTransferObject\Response\BvnResponse.cs" />
@@ -295,7 +297,7 @@
       <DependentUpon>kycbridge.edmx</DependentUpon>
       <LastGenOutput>kycbridge.cs</LastGenOutput>
     </Content>
-    <Content Include="DataAccess\Seamfix\KycService.cs.txt" />
+    <Compile Include="DataAccess\Seamfix\KycService.cs" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -348,7 +350,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="test.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

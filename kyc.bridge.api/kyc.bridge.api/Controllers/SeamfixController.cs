@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using kyc.bridge.api.BusinessLogic;
 using kyc.bridge.api.DataTransferObject;
+using kyc.bridge.api.DataTransferObject.Request;
 using kyc.bridge.api.DataTransferObject.Response;
 
 namespace kyc.bridge.api.Controllers
@@ -68,6 +69,13 @@ namespace kyc.bridge.api.Controllers
         public KycTier3VerifResponse DoKycTier3Req(KycTier3Verification KycTier3Req)
         {
             return KycLogic.KycTier3VerifResponseProcessor(KycTier3Req);
+        }
+
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("id-validation")]
+        public AddressVerificationResponse DoAddressVerifReq(AddressVerificationRequest AddressVerifReq)
+        {
+            return KycLogic.AddressVerificationResponseProcessor(AddressVerifReq);
         }
     }
 }

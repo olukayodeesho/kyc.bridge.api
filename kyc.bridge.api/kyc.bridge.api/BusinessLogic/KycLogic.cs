@@ -127,6 +127,24 @@ namespace kyc.bridge.api.BusinessLogic
             }
             return resp;
         }
+
+
+        public static AddressVerificationResponse AddressVerificationResponseProcessor(AddressVerificationRequest AddressVerifReq)
+        {
+            var resp = new AddressVerificationResponse();
+            try
+            {
+                string jsonResponse = KycService.AddressVerificationRequest(AddressVerifReq);
+                resp = JsonConvert.DeserializeObject<AddressVerificationResponse>(jsonResponse);
+
+            }
+            catch (Exception e)
+            {
+                ExceptionLogRepository.SaveExceptionLog(e);
+            }
+            return resp;
+        }
+
         public static BankBvnResponse GetCustomerBvnDetails(BankBvnRequest bankBvnRequest)
         {
             var resp = new BankBvnResponse();
@@ -165,23 +183,34 @@ namespace kyc.bridge.api.BusinessLogic
             {
                 if (pipeDelimitedBvnString.Contains("|"))
                 {
-                    string[] responseArray = pipeDelimitedBvnString.Split('|');
-                    if (responseArray.Length == 6)
+                    var strArray = pipeDelimitedBvnString.Split('|');
+                    if (strArray.Length == 6)
                     {
-                        bvnDetails.ResponseCode = responseArray[0];
-                        bvnDetails.FirstName = responseArray[1];
-                        bvnDetails.MiddleName = responseArray[2];
-                        bvnDetails.LastName = responseArray[3];
-                        bvnDetails.DateOfBirth = responseArray[4];
-                        bvnDetails.ImageBase64String = responseArray[5];
+                        bvnDetails.ResponseCode = strArray[0];
+                        bvnDetails.FirstName = strArray[1];
+                        bvnDetails.MiddleName = strArray[2];
+                        bvnDetails.LastName = strArray[3];
+                        bvnDetails.DateOfBirth = strArray[4];
+                        bvnDetails.ImageBase64String = strArray[5];
                     }
-                    else
-                    {
-                        var e = new Exception("unsupported bvn response format : " + pipeDelimitedBvnString);
-                        ExceptionLogRepository.SaveExceptionLog(e);
+                    else {
+                        bvnDetails.ResponseCode = "99";
+                        bvnDetails.ResponseDescription = "bank bvn response's fields less or more than required six ";
                     }
                 }
+                else {
+                    bvnDetails.ResponseCode = "99";
+                    bvnDetails.ResponseDescription = "bank bvn response is not delimited with pipe(|) ";
+                }
             }
+            else {
+                bvnDetails.ResponseCode = "99";
+                bvnDetails.ResponseDescription = "bank bvn response is null or empty";
+            }
+            //develop logic 
+            //str1 = o2.ResponseCode + "|" + o2.FirstName + "|" + o2.MiddleName + "|" + o2.LastName + "|" + o2.DateOfBirth + "|" + o2.ImageBase64
+
+            // "00|Muhammad|Buhari|Salisu|1900-09-01|hhjdgfhjsdgfsjdhfgsjdhfgjsdhf"
             return bvnDetails;
         }
 

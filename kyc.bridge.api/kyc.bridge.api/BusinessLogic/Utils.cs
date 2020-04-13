@@ -31,7 +31,8 @@ namespace kyc.bridge.api.BusinessLogic
         public static void AddCustomHeadersToHttpClient( HttpClient client)
          {
             client.DefaultRequestHeaders.Add("userid", ConfigurationManager.AppSettings["SeamFixUserId"]);
-            client.DefaultRequestHeaders.Add("api-key", ConfigurationManager.AppSettings["SeamFixApiKey"]); 
+            client.DefaultRequestHeaders.Add("api-key", ConfigurationManager.AppSettings["SeamFixApiKey"]);
+      
         }
     }
 }
