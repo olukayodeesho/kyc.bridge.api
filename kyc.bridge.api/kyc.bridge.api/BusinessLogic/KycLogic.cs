@@ -144,6 +144,23 @@ namespace kyc.bridge.api.BusinessLogic
             return resp;
         }
 
+
+        public static AddressVerificationStatusResponse AddressVerificationStatusResponseProcessor(string referenceNo )
+        {
+            var resp = new AddressVerificationStatusResponse();
+            try
+            {
+                string jsonResponse = KycService.AddressVerificationStatus(referenceNo);
+                resp = JsonConvert.DeserializeObject<AddressVerificationStatusResponse>(jsonResponse);
+
+            }
+            catch (Exception e)
+            {
+                ExceptionLogRepository.SaveExceptionLog(e);
+            }
+            return resp;
+        }
+
         public static BankBvnResponse GetCustomerBvnDetails(BankBvnRequest bankBvnRequest)
         {
             var resp = new BankBvnResponse();

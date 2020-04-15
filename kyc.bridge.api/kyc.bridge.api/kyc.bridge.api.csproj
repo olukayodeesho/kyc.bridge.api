@@ -247,6 +247,7 @@
     <Compile Include="DataTransferObject\Request\DocumentServiceRequest.cs" />
     <Compile Include="DataTransferObject\Request\IdFaceMatchRequest.cs" />
     <Compile Include="DataTransferObject\Request\IdValidationRequest.cs" />
+    <Compile Include="DataTransferObject\Response\AddressVerificationStatusResponse.cs" />
     <Compile Include="DataTransferObject\Response\AddressVerificationResponse.cs" />
     <Compile Include="DataTransferObject\Response\BankBvnResponse.cs" />
     <Compile Include="DataTransferObject\Response\BvnFacematchResponse.cs" />

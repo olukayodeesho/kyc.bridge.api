@@ -77,5 +77,13 @@ namespace kyc.bridge.api.Controllers
         {
             return KycLogic.AddressVerificationResponseProcessor(AddressVerifReq);
         }
+
+
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("addressVerificationStatus")]
+        public AddressVerificationStatusResponse DoAddressVerifStatusResp(string  referenceNo)
+        {
+            return KycLogic.AddressVerificationStatusResponseProcessor(referenceNo);
+        }
     }
 }

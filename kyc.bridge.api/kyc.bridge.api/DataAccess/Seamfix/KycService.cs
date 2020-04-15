@@ -339,37 +339,35 @@ namespace kyc.bridge.api.DataAccess.Seamfix
             return responseString;
         }
 
+        public static string AddressVerificationStatus(string referenceNo)
+        {
+            var responseString = "";
+            var fullUrl = seamFixBaseUrl + "/sfx-verify/v2/query/" + referenceNo;
+            var requestTime = DateTime.Now;
+            try
 
-        //public static string AddressVerificationRequest(string referenceNo)
-        //{
-        //    var responseString = "";
-        //    var fullUrl = seamFixBaseUrl + "/sfx-verify/v2/query/" + referenceNo;
-        //    var json = JsonConvert.SerializeObject(AddressVerifReq);
-        //    var requestTime = DateTime.Now;
-        //    try
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //            Utils.AddCustomHeadersToHttpClient(client);
-        //            var data = new StringContent(json, Encoding.UTF8, "application/json");
-        //            requestTime = DateTime.Now;
-        //            var httpResponseMsg = client.PostAsync(fullUrl, data).Result;
+            {
+                using (var client = new HttpClient())
+                {
+                    Utils.AddCustomHeadersToHttpClient(client);
+                    requestTime = DateTime.Now;
+                    var httpResponseMsg = client.GetAsync(fullUrl).Result;
 
-        //            if (httpResponseMsg.IsSuccessStatusCode)
-        //            {
-        //                responseString = httpResponseMsg.Content.ReadAsStringAsync().Result;
-        //            }
-        //        }
-        //        var responseTime = DateTime.Now;
-        //        RequestResponseRepository.SaveRequestResponse("POST", json, requestTime, fullUrl, responseString, "", responseTime);
+                    if (httpResponseMsg.IsSuccessStatusCode)
+                    {
+                        responseString = httpResponseMsg.Content.ReadAsStringAsync().Result;
+                    }
+                }
+                var responseTime = DateTime.Now;
+                RequestResponseRepository.SaveRequestResponse("GET", "", requestTime, fullUrl, responseString, "", responseTime);
 
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        ExceptionLogRepository.SaveExceptionLog(e);
-        //    }
-        //    return responseString;
-        //}
+            }
+            catch (Exception e)
+            {
+                ExceptionLogRepository.SaveExceptionLog(e);
+            }
+            return responseString;
+        }
 
 
     }
