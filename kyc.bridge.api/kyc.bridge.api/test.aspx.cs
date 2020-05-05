@@ -16,9 +16,22 @@ namespace kyc.bridge.api
         protected void Page_Load(object sender, EventArgs e)
         {
             BvnVal();
-           // IdVal();
+            // IdVal();
+            //createAuth();
+           // ValidateAuth();
         }
 
+       
+        protected void createAuth()
+        {
+       var obj =   ClientAuthentication.Processor.CreateClientAuthenticationDetails("KycBridgeTest");
+
+        }
+        protected void ValidateAuth()
+        {
+            bool result = ClientAuthentication.Processor.ValidateClientAuthenticationDetails("yVFJ4jCt3rzmm1hXHb6IQPrr!YsLpCStV7OkbiXp", "9911bbbd-7f59-4dd2-8b31-33a46f73ac12");
+
+        }
         protected void IdVal() 
         {
             try

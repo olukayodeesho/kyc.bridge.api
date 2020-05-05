@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace kyc.bridge.api.BusinessLogic
 {
     public class Utils
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
         public static void BypassCertificateError()
         {
             ServicePointManager.ServerCertificateValidationCallback +=
@@ -33,6 +35,16 @@ namespace kyc.bridge.api.BusinessLogic
             client.DefaultRequestHeaders.Add("userid", ConfigurationManager.AppSettings["SeamFixUserId"]);
             client.DefaultRequestHeaders.Add("api-key", ConfigurationManager.AppSettings["SeamFixApiKey"]);
       
+        }
+
+        public static void LogError(Exception e, string message)
+        {
+            logger.ErrorException(message,e);
+        }
+
+        public static void LogInfo(string message)
+        {
+            logger.Info(message);
         }
     }
 }
